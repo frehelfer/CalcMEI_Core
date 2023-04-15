@@ -1,33 +1,24 @@
 //
-//  CoreDataManager.swift
-//  calcMEI
+//  CoreDataManager_Test.swift
+//  calcMEITests
 //
 //  Created by Frédéric Helfer on 23/03/23.
 //
 
 import CoreData
+import CalcMEI_Core
 
-public protocol CoreDataManaging {
-    var viewContext: NSManagedObjectContext { get }
-    func saveContext()
-    func perform<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>) -> [T]?
-}
-
-class CoreDataManager: CoreDataManaging {
+class CoreDataTestManager: CoreDataManaging {
     
     private lazy var persistentContainer: NSPersistentContainer = {
         
-        let modelName = "calcMEI"
+//        let modelName = "calcMEI"
         
-        guard let modelURL = Bundle.module.url(forResource: modelName, withExtension: "momd") else {
-            fatalError("Could not get URL for model: \(modelName)")
-        }
+//        let container = NSPersistentContainer(name: modelName)
         
-        guard let managedObjectModel = NSManagedObjectModel(contentsOf: modelURL) else {
-            fatalError("Unable to load managed object model: \(modelURL)")
-        }
-        
-        let container = NSPersistentContainer(name: modelName, managedObjectModel: managedObjectModel)
+        let container = NSPersistentContainer(name: "calcMEI")
+        let description = container.persistentStoreDescriptions.first
+        description?.type = NSInMemoryStoreType
         
         container.loadPersistentStores { _, error in
             if let error {
@@ -52,7 +43,7 @@ class CoreDataManager: CoreDataManaging {
         }
     }
     
-    func perform<T: NSFetchRequestResult>(fetchRequest: NSFetchRequest<T>) -> [T]? {
+    func perform<T>(fetchRequest: NSFetchRequest<T>) -> [T]? where T : NSFetchRequestResult {
         do {
             let result = try viewContext.fetch(fetchRequest)
             return result
