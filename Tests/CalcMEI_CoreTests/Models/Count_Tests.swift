@@ -34,7 +34,7 @@ final class CountTest: XCTestCase {
     
     func test_Count_rendimentoTributável() {
         let correct: Double = 144
-        let result = sut.rendimentoTributável
+        let result = sut.rendimentoTributavel
         
         XCTAssertEqual(result, correct)
     }

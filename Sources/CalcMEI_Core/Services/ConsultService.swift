@@ -35,7 +35,7 @@ class ConsultService: ConsultServiceProtocol {
         newConsult.receitaBrutaAnual = count.receitaBrutaAnual
         newConsult.lucroApurado = count.lucroApurado
         newConsult.rendimentoIsento = count.rendimentoIsento
-        newConsult.rendimentoTributavel = count.rendimentoTributável
+        newConsult.rendimentoTributavel = count.rendimentoTributavel
         
         coreDataManager.saveContext()
         print(#function)

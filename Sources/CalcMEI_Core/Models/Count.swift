@@ -19,26 +19,11 @@ public struct Count: Identifiable {
     public var outExpenses: Double = 0
     
     // TODO: Change variable names
-    
-    public var receitaBrutaAnual: Double {
-        inServiceProvision + inCommerce + inPassengerTransport
-    }
-    
-    public var lucroApurado: Double {
-        receitaBrutaAnual - outExpenses
-    }
-    
-    public var rendimentoIsento: Double {
-        (inServiceProvision * 0.32) + (inCommerce * 0.08) + (inPassengerTransport * 0.16)
-    }
-    
-    public var rendimentoTributável: Double {
-        lucroApurado - rendimentoIsento
-    }
-    
-    public var hasToDeclare: Bool {
-        rendimentoTributável >= 28559.70
-    }
+    public var receitaBrutaAnual: Double = 0
+    public var lucroApurado: Double = 0
+    public var rendimentoIsento: Double = 0
+    public var rendimentoTributavel: Double = 0
+    public var hasToDeclare: Bool = false
     
     public init(id: UUID = UUID(), date: Date = Date(), name: String? = nil, inServiceProvision: Double = 0, inCommerce: Double = 0, inPassengerTransport: Double = 0, outExpenses: Double = 0) {
         self.id = id
