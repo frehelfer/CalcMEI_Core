@@ -66,7 +66,7 @@ private extension ConsultService {
 
     var allConsults: NSFetchRequest<Consult> {
         let fetchRequest: NSFetchRequest<Consult> = Consult.fetchRequest()
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         return fetchRequest
     }
-    
 }
