@@ -13,5 +13,9 @@ public class CalcMEI_Core {
         )
     }
     
+    public var analyticsService: AnalyticsServiceProtocol {
+        return AnalyticsService()
+    }
+    
     public init() {}
 }
