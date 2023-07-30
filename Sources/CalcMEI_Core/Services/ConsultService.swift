@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 
 public protocol ConsultServiceProtocol {
+    func createFetchedResultsController() -> NSFetchedResultsController<Consult>
     func createConsult(count: Count)
     func deleteConsult(consult: Consult)
     func fetchConsults() -> [Consult]?
@@ -20,6 +21,15 @@ class ConsultService: ConsultServiceProtocol {
     
     init(coreDataManager: CoreDataManaging) {
         self.coreDataManager = coreDataManager
+    }
+    
+    func createFetchedResultsController() -> NSFetchedResultsController<Consult> {
+        NSFetchedResultsController(
+            fetchRequest: allConsults,
+            managedObjectContext: coreDataManager.viewContext,
+            sectionNameKeyPath: nil,
+            cacheName: nil
+        )
     }
     
     func createConsult(count: Count) {

@@ -15,7 +15,7 @@ public protocol CoreDataManaging {
 
 class CoreDataManager: CoreDataManaging {
     
-    private lazy var persistentContainer: NSPersistentContainer = {
+    private var persistentContainer: NSPersistentCloudKitContainer = {
         
         let modelName = "calcMEI"
         
@@ -27,7 +27,7 @@ class CoreDataManager: CoreDataManaging {
             fatalError("Unable to load managed object model: \(modelURL)")
         }
         
-        let container = NSPersistentContainer(name: modelName, managedObjectModel: managedObjectModel)
+        let container = NSPersistentCloudKitContainer(name: modelName, managedObjectModel: managedObjectModel)
         
         container.loadPersistentStores { _, error in
             if let error {
@@ -39,7 +39,9 @@ class CoreDataManager: CoreDataManaging {
     }()
     
     var viewContext: NSManagedObjectContext {
-        persistentContainer.viewContext
+        let context = persistentContainer.viewContext
+        context.automaticallyMergesChangesFromParent = true
+        return context
     }
     
     func saveContext() {

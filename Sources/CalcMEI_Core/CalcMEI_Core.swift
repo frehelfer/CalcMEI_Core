@@ -2,7 +2,7 @@
 public class CalcMEI_Core {
     
     // Persistence
-    private lazy var coreDataManager: CoreDataManaging = {
+    private var coreDataManager: CoreDataManaging = {
         return CoreDataManager()
     }()
     
