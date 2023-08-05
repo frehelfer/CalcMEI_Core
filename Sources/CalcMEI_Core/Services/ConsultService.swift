@@ -9,10 +9,9 @@ import Foundation
 import CoreData
 
 public protocol ConsultServiceProtocol {
-    func createFetchedResultsController() -> NSFetchedResultsController<Consult>
+    func createFetchedResultsController() -> NSFetchedResultsController<Consult>?
     func createConsult(count: Count)
     func deleteConsult(consult: Consult)
-    func fetchConsults() -> [Consult]?
 }
 
 class ConsultService: ConsultServiceProtocol {
@@ -23,7 +22,7 @@ class ConsultService: ConsultServiceProtocol {
         self.coreDataManager = coreDataManager
     }
     
-    func createFetchedResultsController() -> NSFetchedResultsController<Consult> {
+    func createFetchedResultsController() -> NSFetchedResultsController<Consult>? {
         NSFetchedResultsController(
             fetchRequest: allConsults,
             managedObjectContext: coreDataManager.viewContext,
@@ -58,15 +57,6 @@ class ConsultService: ConsultServiceProtocol {
         
         coreDataManager.saveContext()
         print(#function)
-    }
-    
-    func fetchConsults() -> [Consult]? {
-        if let consults = coreDataManager.perform(fetchRequest: allConsults) {
-            print(#function)
-            return consults
-        }
-        
-        return nil
     }
     
 }
